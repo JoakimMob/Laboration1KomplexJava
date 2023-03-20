@@ -15,7 +15,7 @@ public class GissaController {
     GissaService gissaService = new GissaService();
 
     @PostMapping("/login")
-    public String login(@RequestParam("playername") String pName, Model m){
+    public String login(@RequestParam("playername") String pName){
         gissaService.login(pName);
         return "gissapage";
     }

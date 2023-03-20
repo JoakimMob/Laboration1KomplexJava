@@ -16,6 +16,10 @@ public class Player {
     @OneToMany(fetch = FetchType.EAGER, cascade = {CascadeType.ALL})
     List<Result> results;
 
+    public Player(String name) {
+        this.name = name;
+    }
+
     public void addResult(int nGuesses) {
         results.add(new Result(nGuesses));
     }
