@@ -1,10 +1,23 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
-
+<table>
+    <thead>
+    <tr>
+        <th>Player</th>
+        <th>Average</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="p: ${toplist}">
+        <td th:text="${p.player}"></td>
+        <td th:text="${p.average}"></td>
+    </tr>
+    </tbody>
+</table>
 </body>
 </html>

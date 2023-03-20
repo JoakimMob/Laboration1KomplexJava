@@ -5,8 +5,7 @@ import se.iths.Laboration1.business.Player;
 
 import java.util.List;
 
-public interface PlayerRepository extends JpaRepository {
+public interface PlayerRepository extends JpaRepository<Player, Integer> {
     List<Player> findByName(String playerName);
 
-    List<Player> findById(int id);
 }

@@ -24,10 +24,8 @@ public class GissaService {
     @Autowired
     PlayerRepository playerRepository;
 
-    private List<String> replies;
     Random random = new Random();
 
-    private List<String> topList;
 
 
     @PostConstruct
@@ -71,11 +69,5 @@ public class GissaService {
         playerInDB.addResult(nGuesses);
     }
 
-    public List<String> getTopList() {
-        return topList;
-    }
 
-    public void setTopList(List<String> topList) {
-        this.topList = topList;
-    }
 }
