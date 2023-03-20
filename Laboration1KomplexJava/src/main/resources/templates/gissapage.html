@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Gissa mitt tal!</title>
+</head>
+<body>
+<h1>Gissa mitt tal!</h1>
+<form th:action="@{/gissa}" method="post">
+    <p><input type="text" name="gissning" size="8"/></p>
+    <p><input type="submit" value="Gissa" /></p>
+</form>
+<br/>
+<p th:text="${reply}">Svar</p>
+<a href="/toplist" target="_blank">TopList</a>
+</body>
+</html>
