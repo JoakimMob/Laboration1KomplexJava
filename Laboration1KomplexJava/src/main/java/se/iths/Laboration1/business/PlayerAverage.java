@@ -14,6 +14,6 @@ public class PlayerAverage {
     }
 
     public double getAverageResult(){
-        return getAverageResult();
+        return averageResult;
     }
 }

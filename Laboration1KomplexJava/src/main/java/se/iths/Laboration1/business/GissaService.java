@@ -36,8 +36,10 @@ public class GissaService {
     }
 
     public List<PlayerAverage> getTopList(){
-        return playerRepository.findAll().stream().map(player1 ->
-                new PlayerAverage(player1.getName(),player1.getResults()
+        return playerRepository.findAll()
+                .stream()
+                .map(player1 -> new PlayerAverage(
+                        player1.getName(),player1.getResults()
                         .stream().map(Result::getResult).reduce(0,Integer::sum)*1.0/player1.getResults().size()))
                 .toList();
     }

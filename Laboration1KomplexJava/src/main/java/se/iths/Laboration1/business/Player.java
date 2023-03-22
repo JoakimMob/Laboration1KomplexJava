@@ -2,6 +2,7 @@ package se.iths.Laboration1.business;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -19,6 +20,7 @@ public class Player {
 
     public Player(String name) {
         this.name = name;
+        this.results=new ArrayList<>();
     }
 
     public Player() {
