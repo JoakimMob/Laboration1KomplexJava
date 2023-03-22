@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 
 import java.util.List;
 
+@Entity
 @Table(name="players")
 public class Player {
 
@@ -18,6 +19,10 @@ public class Player {
 
     public Player(String name) {
         this.name = name;
+    }
+
+    public Player() {
+
     }
 
     public void addResult(int nGuesses) {

@@ -14,8 +14,8 @@
     </thead>
     <tbody>
     <tr th:each="p: ${toplist}">
-        <td th:text="${p.player}"></td>
-        <td th:text="${p.average}"></td>
+        <td th:text="${p.getName()}"></td>
+        <td th:text="${p.getAverageResult()}"></td>
     </tr>
     </tbody>
 </table>
