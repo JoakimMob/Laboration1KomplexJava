@@ -7,6 +7,7 @@ import org.springframework.web.context.annotation.SessionScope;
 import se.iths.Laboration1.storage.PlayerRepository;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Random;
 
@@ -33,6 +34,14 @@ public class GissaService {
         secret = random.nextInt(1,11);
         guessCount=0;
     }
+
+    public List<PlayerAverage> getTopList(){
+        return playerRepository.findAll().stream().map(player1 ->
+                new PlayerAverage(player1.getName(),player1.getResults()
+                        .stream().map(Result::getResult).reduce(0,Integer::sum)*1.0/player1.getResults().size()))
+                .toList();
+    }
+
     public String gissa(int guess) {
         if (!isLoggedIn) throw new IllegalStateException("Not logged in");
         guessCount++;
