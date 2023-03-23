@@ -6,9 +6,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.context.annotation.SessionScope;
 import se.iths.Laboration1.storage.PlayerRepository;
 
-import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
 import java.util.Random;
 
 @Service
@@ -21,6 +20,7 @@ public class GissaService {
     Player player;
 
     boolean isLoggedIn;
+    Result result;
 
     @Autowired
     PlayerRepository playerRepository;
@@ -28,19 +28,19 @@ public class GissaService {
     Random random = new Random();
 
 
-
     @PostConstruct
-    private void init(){
-        secret = random.nextInt(1,11);
-        guessCount=0;
+    private void init() {
+        secret = random.nextInt(1, 11);
+        guessCount = 0;
     }
 
-    public List<PlayerAverage> getTopList(){
-        return playerRepository.findAll()
+    public List<PlayerAverage> getResults() {
+        return playerRepository
+                .findAll()
                 .stream()
-                .map(player1 -> new PlayerAverage(
-                        player1.getName(),player1.getResults()
-                        .stream().map(Result::getResult).reduce(0,Integer::sum)*1.0/player1.getResults().size()))
+                .map(player -> new PlayerAverage(
+                        player.getName(), player.getResults()
+                        .stream().map(Result::getResult).reduce(0, Integer::sum) * 1.0 / player.getResults().size()))
                 .toList();
     }
 
@@ -50,34 +50,31 @@ public class GissaService {
         if (guess < secret) {
             return "För lågt";
         }
-        if (guess> secret) {
+        if (guess > secret) {
             return "För stort";
         }
         int resultat = guessCount;
-
+        result.setResult(resultat);
         init();
-        registerResult(resultat);
+        player.addResult(result);
+        playerRepository.save(player);
+
         return "Rätt svar på " + resultat + " gissningar! Nytt tal startar!";
     }
 
     public void login(String playerName) {
         if (isLoggedIn) return;
 
-        List<Player> players = playerRepository.findByName(playerName);
-        if (players.size()>0){
-            player = players.get(0);
+        Optional<Player> players = playerRepository.findByName(playerName);
+        if (players.isPresent()) {
+            player = players.get();
         } else {
             player = new Player(playerName);
             playerRepository.save(player);
         }
+        result = new Result();
         isLoggedIn = true;
 
-    }
-
-    public void registerResult(int nGuesses){
-        if (!isLoggedIn) return;
-        Player playerInDB = playerRepository.findById(player.getId()).get();
-        playerInDB.addResult(nGuesses);
     }
 
 

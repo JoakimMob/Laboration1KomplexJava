@@ -29,8 +29,14 @@ public class GissaController {
 
     @GetMapping("/toplist")
     public String getTopList(Model m){
-        m.addAttribute("toplist", gissaService.getTopList());
+        m.addAttribute("toplist", gissaService.getResults());
         return "toppage";
     }
+
+    /*@PostMapping("/all")
+    String getAll(Model model) {
+        model.addAttribute("gueesList", gissaService.getAll());
+        return "toppage";
+    }*/
 
 }

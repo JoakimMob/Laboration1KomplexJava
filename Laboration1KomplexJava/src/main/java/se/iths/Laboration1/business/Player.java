@@ -13,6 +13,7 @@ public class Player {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     int id;
 
+    @Column(name = "name")
     String name;
 
     @OneToMany(fetch = FetchType.EAGER, cascade = {CascadeType.ALL})
@@ -27,8 +28,8 @@ public class Player {
 
     }
 
-    public void addResult(int nGuesses) {
-        results.add(new Result(nGuesses));
+    public void addResult(Result result) {
+        results.add(result);
     }
 
     public int getId() {
@@ -43,15 +44,7 @@ public class Player {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public List<Result> getResults() {
         return results;
-    }
-
-    public void setResults(List<Result> results) {
-        this.results = results;
     }
 }

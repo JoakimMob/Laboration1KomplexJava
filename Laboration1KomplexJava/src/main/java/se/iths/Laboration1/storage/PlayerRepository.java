@@ -4,8 +4,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import se.iths.Laboration1.business.Player;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface PlayerRepository extends JpaRepository<Player, Integer> {
-    List<Player> findByName(String playerName);
+    Optional<Player> findByName(String playerName);
 
 }

@@ -1,11 +1,9 @@
 package se.iths.Laboration1.business;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 @Entity
+@Table(name = "result")
 public class Result {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,7 +28,9 @@ public class Result {
     }
 
     public Result() {
+        this.result=0;
     }
+
 
     public Result(int result) {
         this.result = result;
