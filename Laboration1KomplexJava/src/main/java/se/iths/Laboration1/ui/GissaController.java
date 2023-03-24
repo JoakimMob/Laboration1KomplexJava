@@ -33,10 +33,9 @@ public class GissaController {
         return "toppage";
     }
 
-    /*@PostMapping("/all")
-    String getAll(Model model) {
-        model.addAttribute("gueesList", gissaService.getAll());
-        return "toppage";
-    }*/
+    @GetMapping("/gissa")
+    public String guessView() {
+        return "gissapage";
+    }
 
 }

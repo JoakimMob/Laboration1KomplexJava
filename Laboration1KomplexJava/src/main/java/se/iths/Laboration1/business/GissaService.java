@@ -31,6 +31,7 @@ public class GissaService {
     private void init() {
         secret = random.nextInt(1, 11);
         guessCount = 0;
+        result = new Result();
     }
 
     public List<PlayerAverage> getResults() {
@@ -52,11 +53,12 @@ public class GissaService {
             return "För stort";
         }
         int resultat = guessCount;
-        result.setResult(resultat);
-        init();
-        player.addResult(result);
-        playerRepository.save(player);
 
+        result.setResult(resultat);
+        player.addResult(result);
+
+        init();
+        playerRepository.save(player);
         return "Rätt svar på " + resultat + " gissningar! Nytt tal startar!";
     }
 
