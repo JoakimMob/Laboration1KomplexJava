@@ -19,7 +19,6 @@ public class GissaService {
 
     Player player;
 
-    boolean isLoggedIn;
     Result result;
 
     @Autowired
@@ -45,7 +44,6 @@ public class GissaService {
     }
 
     public String gissa(int guess) {
-        if (!isLoggedIn) throw new IllegalStateException("Not logged in");
         guessCount++;
         if (guess < secret) {
             return "För lågt";
@@ -63,7 +61,6 @@ public class GissaService {
     }
 
     public void login(String playerName) {
-        if (isLoggedIn) return;
 
         Optional<Player> players = playerRepository.findByName(playerName);
         if (players.isPresent()) {
@@ -73,7 +70,6 @@ public class GissaService {
             playerRepository.save(player);
         }
         result = new Result();
-        isLoggedIn = true;
 
     }
 
