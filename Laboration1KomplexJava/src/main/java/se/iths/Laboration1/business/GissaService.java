@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.context.annotation.SessionScope;
 import se.iths.Laboration1.storage.PlayerRepository;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 import java.util.Random;
@@ -40,7 +41,9 @@ public class GissaService {
                 .stream()
                 .map(player -> new PlayerAverage(
                         player.getName(), player.getResults()
-                        .stream().map(Result::getResult).reduce(0, Integer::sum) * 1.0 / player.getResults().size()))
+                        .stream().map(Result::getResult)
+                        .reduce(0, Integer::sum) * 1.0 / player.getResults().size()))
+                .sorted(Comparator.naturalOrder())
                 .toList();
     }
 

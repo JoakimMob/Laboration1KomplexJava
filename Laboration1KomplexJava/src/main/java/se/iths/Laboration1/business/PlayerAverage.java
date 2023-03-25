@@ -1,6 +1,6 @@
 package se.iths.Laboration1.business;
 
-public class PlayerAverage {
+public class PlayerAverage implements Comparable {
     private String name;
     private Double averageResult;
 
@@ -15,5 +15,11 @@ public class PlayerAverage {
 
     public double getAverageResult(){
         return averageResult;
+    }
+
+    @Override
+    public int compareTo(Object o) {
+        PlayerAverage playerAverage = (PlayerAverage) o;
+        return Double.compare(this.averageResult,playerAverage.averageResult);
     }
 }
